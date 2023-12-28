@@ -1,0 +1,37 @@
+# Project to Demonstrate Sentiment Analysis of Twitter Posts
+
+# importing the required libraries
+import nltk
+from nltk.sentiment import SentimentIntensityAnalyzer
+
+nltk.download('vader_lexicon')  # Downloading the sentiment analysis lexicon
+
+def sentiment_analysis(text):
+    siya = SentimentIntensityAnalyzer()
+    scores_for_sentiment = siya.polarity_scores(text)
+
+    # Determining the sentiment on the basis of the otained compound score
+    if scores_for_sentiment['compound'] >= 0.05:
+        return 'Positive'
+    elif scores_for_sentiment['compound'] <= -0.05:
+        return 'Negative'
+    else:
+        return 'Neutral'
+
+def main():
+    # putting some Twitter sentiments
+    tweets_lst = [
+        "I didn't like the view of this area!",
+        "I need to attend the dance program.",
+        "Please serve me the tea.",
+        "I love Ilam tea!",
+        "Wow! Smells tasty!"
+    ]
+
+    # Analyze sentiments for each tweet
+    for i in tweets_lst:
+        sentiment = sentiment_analysis(i)
+        print(f"Sentiment: {sentiment}\nTweet: {i}\n")
+
+if __name__ == "__main__":
+    main()
